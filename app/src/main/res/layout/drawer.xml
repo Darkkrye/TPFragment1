@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+
+    <include layout="@layout/header" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu1"
+        android:padding="20dp"
+        android:gravity="center_vertical"
+        android:textColor="#333"
+        android:text="Profile"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu2"
+        android:padding="20dp"
+        android:gravity="center_vertical"
+        android:textColor="#333"
+        android:text="Repos"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu3"
+        android:padding="20dp"
+        android:gravity="center_vertical"
+        android:textColor="#333"
+        android:text="Numbers"
+        />
+
+</LinearLayout>
