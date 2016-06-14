@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 public interface GitHubService {
 
     String END_POINT = "https://api.github.com";
-    String TOKEN = "e8a27efc2e0094f7f1d2b414dad96656cd34a224";
+    String TOKEN = "";
 
     @Headers("Authorization: token "+TOKEN)
     @GET("users/{username}")
