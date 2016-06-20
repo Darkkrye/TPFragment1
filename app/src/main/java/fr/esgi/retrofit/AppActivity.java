@@ -152,7 +152,7 @@ public class AppActivity extends AppCompatActivity {
         menu1.setBackgroundColor(ContextCompat.getColor(this, R.color.color_white));
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentLayout, NumbersFragment.newInstance(), "numbersFragment")
+                .replace(R.id.contentLayout, NumbersFragment.newInstance(MyVariables.user), "numbersFragment")
                 .commit();
 
         drawerLayout.closeDrawer(Gravity.LEFT);

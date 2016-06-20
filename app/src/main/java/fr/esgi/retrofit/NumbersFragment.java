@@ -27,14 +27,23 @@ public class NumbersFragment extends Fragment {
     @BindView(R.id.tabs) public TabLayout tabLayout;
     @BindView(R.id.viewpager) public ViewPager viewPager;
 
-    public static Fragment newInstance() {
+    User user;
 
-        return new NumbersFragment();
+    public static Fragment newInstance(User user) {
+        NumbersFragment fragment = new NumbersFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable("user", user);
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.user = (User) getArguments().getSerializable("user");
     }
 
     @Nullable
@@ -55,9 +64,9 @@ public class NumbersFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(InfoFragment.newInstance(MyVariables.user.getPublicRepos()), "Repos publiques");
-        adapter.addFragment(InfoFragment.newInstance(MyVariables.user.getFollowers()), "Followers");
-        adapter.addFragment(InfoFragment.newInstance(MyVariables.user.getFollowing()), "Following");
+        adapter.addFragment(InfoFragment.newInstance(this.user.getPublicRepos()), "Repos publiques");
+        adapter.addFragment(InfoFragment.newInstance(this.user.getFollowers()), "Followers");
+        adapter.addFragment(InfoFragment.newInstance(this.user.getFollowing()), "Following");
         viewPager.setAdapter(adapter);
     }
 
