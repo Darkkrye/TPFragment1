@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,14 +21,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class UserFragment extends Fragment {
 
-    @BindView(R.id.civ_profile_image)
+    @BindView(R.id.thumbnail) ImageView ivThumbnail;
+    @BindView(R.id.name) TextView tvName;
+    @BindView(R.id.pseudo) TextView tvPseudo;
+    @BindView(R.id.followers) TextView tvFollowers;
+
+    /*@BindView(R.id.civ_profile_image)
     CircleImageView civProfileImage;
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_pseudo)
     TextView tvPseudo;
     @BindView(R.id.tv_followers)
-    TextView tvFollowers;
+    TextView tvFollowers;*/
 
     //Create a new fragment with parameters
     public static Fragment newInstance(){
@@ -58,6 +64,15 @@ public class UserFragment extends Fragment {
 
         tvPseudo.setText("Pseudo : " + MyVariables.user.getLogin());
         tvFollowers.setText("Nombre de followers : " + MyVariables.user.getFollowers());
-        Glide.with((Fragment)this).load(MyVariables.user.getAvatarUrl()).into(civProfileImage);
+        Glide.with(this).load(MyVariables.user.getAvatarUrl()).into(ivThumbnail);
+
+        /*if (MyVariables.user.getName() == null)
+            tvName.setText("Nom : (Aucun nom n'a été renseigné)");
+        else
+            tvName.setText("Nom : " + MyVariables.user.getName());
+
+        tvPseudo.setText("Pseudo : " + MyVariables.user.getLogin());
+        tvFollowers.setText("Nombre de followers : " + MyVariables.user.getFollowers());
+        Glide.with((Fragment)this).load(MyVariables.user.getAvatarUrl()).into(civProfileImage);*/
     }
 }
