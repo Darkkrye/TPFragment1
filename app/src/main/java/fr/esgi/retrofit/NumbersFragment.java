@@ -18,14 +18,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import github.chenupt.springindicator.SpringIndicator;
 
 /**
  * Created by Pierre on 14/06/2016.
  */
 public class NumbersFragment extends Fragment {
 
-    @BindView(R.id.tabs) public TabLayout tabLayout;
-    @BindView(R.id.viewpager) public ViewPager viewPager;
+    //@BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.indicator) SpringIndicator indicator;
 
     User user;
 
@@ -59,7 +61,8 @@ public class NumbersFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+        //tabLayout.setupWithViewPager(viewPager);
+        indicator.setViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
