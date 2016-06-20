@@ -1,5 +1,6 @@
 package fr.esgi.retrofit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,12 +14,12 @@ import retrofit2.http.Path;
 public interface GitHubService {
 
     String END_POINT = "https://api.github.com";
-    String TOKEN = "";
+    String TOKEN = "25a11c74f91031d9ca6ec59940fe7731c4f564df";
 
     @Headers("Authorization: token "+TOKEN)
     @GET("users/{username}")
     Call<User> getUser(@Path("username") String username);
 
     @GET("users/{user}/repos")
-    Call<List<Repo>> getListRepo(@Path("user") String user);
+    Call<ArrayList<Repo>> getListRepo(@Path("user") String user);
 }

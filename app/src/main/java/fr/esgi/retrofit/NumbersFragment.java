@@ -6,13 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by Pierre on 14/06/2016.
  */
 public class NumbersFragment extends Fragment {
+
+    @BindView(R.id.info) TextView tvInfo;
 
     public static Fragment newInstance() {
         return new NumbersFragment();
@@ -34,6 +38,6 @@ public class NumbersFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-
+        //tvInfo.setText(MyVariables.user.getPublicRepos());
     }
 }

@@ -1,5 +1,7 @@
 package fr.esgi.retrofit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.ViewTarget;
 
 import java.util.List;
 
@@ -44,6 +48,9 @@ public class AppActivity extends AppCompatActivity {
     @BindView(R.id.menu2) TextView menu2;
     @BindView(R.id.menu3) TextView menu3;
 
+    @BindView(R.id.username) TextView tvUsername;
+    @BindView(R.id.email) TextView tvEmail;
+
     ActionBarDrawerToggle drawerToggle;
     GitHubService service;
 
@@ -61,6 +68,16 @@ public class AppActivity extends AppCompatActivity {
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, 0, 0);
         drawerLayout.addDrawerListener(drawerToggle);
 
+        if (MyVariables.user.getName() != null) {
+            this.tvUsername.setText(MyVariables.user.getName());
+        } else {
+            this.tvUsername.setText(MyVariables.user.getLogin());
+        }
+        if (MyVariables.user.getEmail() != null) {
+            this.tvEmail.setText(MyVariables.user.getEmail());
+        } else {
+            this.tvEmail.setText(MyVariables.user.getLogin() + "@me.com");
+        }
         Glide.with(this).load(MyVariables.user.getAvatarUrl()).into(profileImage);
         Glide.with(this).load("https://lh3.googleusercontent.com/proxy/xm_1j45fU-DIHPPxZ7JUrkNcrP3Vt4g89c6EmJs9J-xRurCVcaDRka0Ds39IKpRYM3kKo36aSEjUtI9VMzODjpjA-LNQJ9nAPKRsk5_4AiYQkksM_1BYK90ijg=w506-h284").asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override
@@ -77,20 +94,6 @@ public class AppActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentLayout, UserFragment.newInstance(), "userFragment")
                 .commit();
-
-        service = GithubWebService.get();
-
-        service.getListRepo(MyVariables.user.getLogin()).enqueue(new Callback<List<Repo>>() {
-            @Override
-            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Repo>> call, Throwable t) {
-
-            }
-        });
     }
 
     /* OVERRIDED METHODS */
@@ -154,4 +157,6 @@ public class AppActivity extends AppCompatActivity {
 
         drawerLayout.closeDrawer(Gravity.LEFT);
     }
+
+
 }
