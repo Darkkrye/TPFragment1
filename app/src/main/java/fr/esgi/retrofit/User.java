@@ -2,11 +2,13 @@ package fr.esgi.retrofit;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by mohsan on 10/05/16.
  */
 
-public class User {
+public class User implements Serializable {
 
     public String name;
     public String login;
