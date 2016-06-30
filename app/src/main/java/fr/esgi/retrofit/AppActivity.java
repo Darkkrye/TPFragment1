@@ -52,7 +52,6 @@ public class AppActivity extends AppCompatActivity {
     @BindView(R.id.email) TextView tvEmail;
 
     ActionBarDrawerToggle drawerToggle;
-    GitHubService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

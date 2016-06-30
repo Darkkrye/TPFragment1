@@ -21,9 +21,11 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String USERNAME = "username";
     @BindView(R.id.et_username) EditText etUsername;
     @BindView(R.id.btn_search) Button btnSearch;
 
+    SharedPreferences sharedPrefs; //Correction stocker les shareprefs en field
     GitHubService service;
 
     @Override
@@ -33,10 +35,10 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         service = GithubWebService.get();
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String username;
-        if ((username = sharedPrefs.getString("username", null)) != null) {
+        if ((username = sharedPrefs.getString(USERNAME, null)) != null) {
             this.etUsername.setText(username);
         }
     }
@@ -52,15 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     //displayUser(user);
 
-                    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
                     if (user != null) {
-                        editor.putString("username", etUsername.getText().toString()).commit();
+                        sharedPrefs.edit().putString(USERNAME, etUsername.getText().toString()).apply();  //Correction apply
                         MyVariables.user = user;
                         Intent intent = new Intent(getApplicationContext(), AppActivity.class);
                         startActivity(intent);
                     } else {
-                        editor.remove("username").commit();
+                        sharedPrefs.edit().remove(USERNAME).apply(); //Correction apply
                         Toast.makeText(getApplicationContext(), "Aucun utilisateur trouvé", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -72,8 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         } else {
             Toast.makeText(getApplicationContext(), "Vous n'avez pas saisi de nom d'utilisateur", Toast.LENGTH_SHORT).show();
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            sharedPrefs.edit().remove("username").commit();
+            sharedPrefs.edit().remove(USERNAME).apply();  //Correction apply
         }
     }
 }
