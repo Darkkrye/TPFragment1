@@ -25,6 +25,7 @@ import github.chenupt.springindicator.SpringIndicator;
  */
 public class NumbersFragment extends Fragment {
 
+    public static final String USER = "user";
     //@BindView(R.id.tabs) TabLayout tabLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
     @BindView(R.id.indicator) SpringIndicator indicator;
@@ -35,7 +36,7 @@ public class NumbersFragment extends Fragment {
         NumbersFragment fragment = new NumbersFragment();
 
         Bundle args = new Bundle();
-        args.putSerializable("user", user);
+        args.putSerializable(USER, user);
         fragment.setArguments(args);
 
         return fragment;
@@ -45,7 +46,7 @@ public class NumbersFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.user = (User) getArguments().getSerializable("user");
+        this.user = (User) getArguments().getSerializable(USER);
     }
 
     @Nullable

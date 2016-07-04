@@ -24,11 +24,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     /* VARIABLES */
     Context context;
     private ArrayList<Repo> repos;
+    View.OnClickListener clickListener; //Correction au lieu de static, passe le en référence
 
     /* CONSTRUCTOR */
-    public CustomAdapter(ArrayList<Repo> repos, Context context) {
+    public CustomAdapter(ArrayList<Repo> repos, Context context, View.OnClickListener clickListener) {
         this.repos = repos;
         this.context = context;
+        this.clickListener = clickListener;
     }
 
     /* ONCREATE / ONBIND / GETITEMCOUNT */
@@ -37,7 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Create View
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repo_layout, parent, false);
-        view.setOnClickListener(RepoFragment.myOnClickListener);
+        view.setOnClickListener(clickListener);  //Correction au lieu de static, passe le en référence
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;

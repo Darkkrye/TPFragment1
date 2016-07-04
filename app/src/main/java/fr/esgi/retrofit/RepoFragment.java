@@ -28,14 +28,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RepoFragment extends Fragment {
 
-    private static RecyclerView.Adapter adapter;
+    //Correction ne pas utiliser de statics !
+    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    public static ArrayList<Repo> repos;
-    public static View.OnClickListener myOnClickListener;
+    public ArrayList<Repo> repos;
+    public View.OnClickListener myOnClickListener;
 
-    public static Fragment newInstance() {
+    public Fragment newInstance() {
         return new RepoFragment();
     }
 
@@ -108,7 +109,7 @@ public class RepoFragment extends Fragment {
     public void showRepos(ArrayList<Repo> repos, int statusCode) {
         if (statusCode == 200) {
             this.repos = repos;
-            adapter = new CustomAdapter(repos, getContext());
+            adapter = new CustomAdapter(repos, getContext(), myOnClickListener);
             recyclerView.setAdapter(adapter);
         } else
             showError("Code erreur : " + String.valueOf(statusCode));
@@ -119,7 +120,7 @@ public class RepoFragment extends Fragment {
     }
 
     /* PRIVATE STATIC CLASSES */
-    private static class MyOnClickListener implements View.OnClickListener {
+    public class MyOnClickListener implements View.OnClickListener {
 
         /* VARIABLES */
         private final Context context;

@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
  */
 public class InfoFragment extends Fragment {
 
+    public static final String INFORMATION = "information"; //Correction constant
     @BindView(R.id.tv_information) TextView tvInformation;
 
     private String information;
@@ -24,7 +25,7 @@ public class InfoFragment extends Fragment {
         InfoFragment fragment = new InfoFragment();
 
         Bundle args = new Bundle();
-        args.putString("information", information);
+        args.putString(INFORMATION, information);
         fragment.setArguments(args);
 
         return fragment;
@@ -34,7 +35,7 @@ public class InfoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.information = getArguments().getString("information", "0");
+        this.information = getArguments().getString(INFORMATION, "0");
     }
 
     @Nullable
